@@ -1,0 +1,29 @@
+{
+  "name": "node-red-contrib-aes-128-cbc",
+  "version": "1.0.0",
+  "description": "A straight-forward hex string-based 128-bit AES en/decryption with CBC mode.",
+  "main": "aes128cbc.js",
+  "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "aes-js": "3.1.2"
+  },
+  "repository": {
+      "type": "git",
+      "url": "https://github.com/joe-darkmatter/node-red-contrib-aes-128-cbc.git"
+  },
+  "keywords": [
+    "aes",
+    "aes-cbc",
+    "cipher",
+    "crypt"
+  ],
+  "node-red": {
+    "nodes": {
+      "aes-128-cbc": "aes128cbc.js"
+    }
+  },
+  "author": "Zulkifli Hamzah <joe.darkmatter@gmail.com>",
+  "license": "MIT"
+}

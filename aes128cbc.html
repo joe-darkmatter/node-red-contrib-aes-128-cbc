@@ -1,0 +1,79 @@
+<script type="text/javascript">
+    RED.nodes.registerType('aes-128-cbc',{
+        category: 'crypto',
+        color: '#a6bbcf',
+        defaults: {
+            name: {value:""},
+            topic: {value:""}        },
+        inputs:1,
+        outputs:1,
+        icon: "aes.png",
+        label: function() {
+            return this.name||"aes-128-cbc";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="aes-128-cbc">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-topic"><i class="icon-tag"></i> Topic</label>
+        <input type="text" id="node-input-topic" placeholder="Topic">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="aes-128-cbc">
+    <p>Encrypts or decrypt a hex string with 128-bit AES encryption algorithm with CBC mode method.</p>
+
+    <h3>Inputs</h3>
+    <dl class="message-properties">
+        <dt>msg.payload<span class="property-type">string</span></dt>
+        <dd>The string representing hexadecimal value to be encrypted or decrypted.
+            e.g. '000102030405' represents a byte array with the value of 0x00,0x01,0x02,0x03,0x04,0x05.
+            Each encryption block is expected to be 16-byte block (i.e., 128 bits).
+            If the block size entered
+            is less than or greater than 16 bytes, it will be automatically padded with zeroes so that
+            the payload will be a multiple of 16-byte block(s).
+            So for the example here, as many as 10 bytes with 0x00 values will be padded.
+        </dd>
+        <dt>msg.key<span class="property-type">string</span></dt>
+        <dd>The hexadecimal string representation for the encryption Key.
+            It must be set to 16 bytes (128 bits).
+            It will automatically be padded or trimmed to make it 16 bytes in length.
+        </dd>
+        <dt>msg.iv<span class="property-type">string</span></dt>
+        <dd>The hexadecimal string representation for the encryption Initialization Vector.
+            It must be set to 16 bytes (128 bits).
+            It will automatically be padded or trimmed to make it 16 bytes in length.
+        </dd>
+        <dt>msg.mode<span class="property-type">string</span></dt>
+        <dd>It has to be set to either 'encrypt' or 'decrypt', which
+            determines its function.
+        </dd>
+    </dl>
+
+    <h3>Outputs</h3>
+    <ol class="node-ports">
+        <li>Standard output
+            <dl class="message-properties">
+                <dt>msg.payload<span class="property-type">string</span></dt>
+                <dd>The hexadecimal string of encrypted or decrypted payload,
+                depending on the function defined at the input.</dd>
+            </dl>
+        </li>
+    </ol>
+
+    <h3>Details</h3>
+    <p>Example:</p>
+    <pre><code>msg.key = '000102030405060708090a0b0c0d0e0f';
+msg.iv = '00020406080a0c0e';//Eight '00's will be added
+msg.mode = 'encrypt'; //Or 'decrypt'
+msg.payload = 'aabbccddeeff00112233445566778899';
+return msg;</code></pre>
+    <p>The output of the above settings on the <code>msg.payload</code>
+        output should be <code>'f903505157d1fcd600031711bd0b7ec0'</code>.
+
+</script>

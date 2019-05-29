@@ -1,6 +1,6 @@
 {
   "name": "node-red-contrib-aes-128-cbc",
-  "version": "1.0.0",
+  "version": "0.0.1-security",
   "description": "A straight-forward hex string-based 128-bit AES en/decryption with CBC mode.",
   "main": "aes128cbc.js",
   "scripts": {
